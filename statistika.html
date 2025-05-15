@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Statistiky | Sladké Nebe</title>
+  <link rel="stylesheet" href="public/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Domů</a>
+        <a href="sluzby.html">Nabídka</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="o-nas.html">O nás</a>
+        <a href="objednavka.html">Objednat</a>
+        <a href="statistika.html">Statistiky</a>
+      </nav>
+  <main>
+    <h2>Co si naši zákazníci nejčastěji objednávají?</h2>
+    <ul id="stats"></ul>
+  </main>
+  <script>
+    fetch('/api/statistics')
+      .then(res => res.json())
+      .then(data => {
+        const ul = document.getElementById('stats');
+        for (let key in data) {
+          const li = document.createElement('li');
+          li.textContent = `${key}: ${data[key]}× objednáno`;
+          ul.appendChild(li);
+        }
+      });
+  </script>
+  <footer>&copy; 2025 Sladké Nebe.</footer>
+</body>
+</html>

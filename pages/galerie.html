@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie | Sladké Nebe</title>
+  <link rel="stylesheet" href="public/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Domů</a>
+    <a href="sluzby.html">Nabídka</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="o-nas.html">O nás</a>
+    <a href="objednavka.html">Objednat</a>
+    <a href="statistika.html">Statistiky</a>
+  </nav>
+  <main class="portfolio">
+    <h2>Naše dobroty na fotkách</h2>
+    <div class="portfolio-grid" id="portfolio-gallery"></div>
+  </main>
+  <script>
+    fetch('/api/portfolio')
+      .then(res => res.json())
+      .then(data => {
+        const gallery = document.getElementById('portfolio-gallery');
+        data.forEach(photo => {
+          const img = document.createElement('img');
+          img.src = photo.url;
+          gallery.appendChild(img);
+        });
+      });
+  </script>
+  <footer>&copy; 2025 Sladké Nebe.</footer>
+</body>
+</html>

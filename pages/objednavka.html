@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Objednávka | Sladké Nebe</title>
+  <link rel="stylesheet" href="public/style.css">
+  
+</head>
+<body class="order-page"  class="hero2" style="background-image: url('public/images/Mask\ group.png')"></header>
+  <nav> 
+    <a href="index.html">Domů</a>
+    <a href="sluzby.html">Nabídka</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="o-nas.html">O nás</a>
+    <a href="objednavka.html">Objednat</a>
+    <a href="statistika.html">Statistiky</a>
+  </nav>
+  <main class="contact">
+    <h2>Objednejte si sladkost</h2>
+    <form id="contact-form">
+      <input name="name" placeholder="Jméno" required>
+      <input name="email" type="email" placeholder="Email" required>
+      <select name="style" required>
+        <option value="">Vyberte typ sladkosti</option>
+        <option>Dort</option>
+        <option>Muffin</option>
+        <option>Sušenka</option>
+        <option>Perníček</option>
+        <option>Speciál</option>
+      </select>
+      <textarea name="message" placeholder="Vaše přání nebo poznámka" required></textarea>
+      <button type="submit">Odeslat objednávku</button>
+    </form>
+    <p id="response-message" style="margin-top: 1rem; font-weight: bold;"></p>
+  </main>
+  <script>
+    const form = document.getElementById('contact-form');
+    const responseMessage = document.getElementById('response-message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+
+      fetch('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          responseMessage.textContent = result.message;'Děkujeme za objednávku!';
+          responseMessage.style.color = 'green';
+          form.reset();
+        } else {
+          responseMessage.textContent = result.error; 'Došlo k chybě při odeslání.';
+          responseMessage.style.color = 'red';
+        }
+      })
+      .catch(() => {
+        responseMessage.textContent = 'Došlo k chybě při odeslání.';
+        responseMessage.style.color = 'red';
+      });
+    });
+  </script>
+  <footer>&copy; 2025 Sladké Nebe.</footer>
+</body>
+</html>

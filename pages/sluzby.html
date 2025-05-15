@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nabídka - Sladké Nebe</title>
+  <link rel="stylesheet" href="public/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff8f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background: #f58ca3;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #5c3d2e;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .accordion-item h3 {
+      cursor: pointer;
+      background: #f7d6bf;
+      padding: 15px;
+      margin: 0;
+      font-size: 20px;
+      border-radius: 8px;
+    }
+
+    .accordion-item .content {
+      display: none;
+      padding: 15px;
+      background: #fff;
+    }
+
+    .product {
+      display: inline-block;
+      width: 200px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: #f58ca3;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Domů</a>
+    <a href="sluzby.html">Nabídka</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="o-nas.html">O nás</a>
+    <a href="objednavka.html">Objednat</a>
+    <a href="statistika.html">Statistiky</a>
+  </nav>
+
+  <main class="section">
+    <h2>Naše sladká nabídka</h2>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <h3 onclick="toggleSection(this)">Dorty</h3>
+        <div class="content">
+          <div class="product">
+            <img src="public/images/cokoladovy-dort.jpg" alt="Čokoládový dort">
+            <p>Čokoládový dort</p>
+          </div>
+          <div class="product">
+            <img src="public/images/ovocny-dort.jpg" alt="Ovocný dort">
+            <p>Ovocný dort</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 onclick="toggleSection(this)">Sušenky</h3>
+        <div class="content">
+          <div class="product">
+            <img src="public/images/cookies.jpg" alt="Cookies">
+            <p>Cookies s čokoládou</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 onclick="toggleSection(this)">Muffiny</h3>
+        <div class="content">
+          <div class="product">
+            <img src="public/images/bananovy-muffin.jpg" alt="Banánový muffin">
+            <p>Banánový muffin</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 onclick="toggleSection(this)">Perníčky</h3>
+        <div class="content">
+          <div class="product">
+            <img src="public/images/vanocni-pernik.jpg" alt="Vánoční perníček">
+            <p>Vánoční perníček</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 Sladké Nebe - Ručně a s láskou pečené.</footer>
+
+  <script>
+    function toggleSection(element) {
+      const content = element.nextElementSibling;
+      const isOpen = content.style.display === "block";
+      document.querySelectorAll('.accordion .content').forEach(el => el.style.display = "none");
+      if (!isOpen) {
+        content.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
