@@ -107,7 +107,8 @@ body {
   }
 
   .hero2 {
-    height: 90vh;
+    background-image: url('public/images/Mask\group.png');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
