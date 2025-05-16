@@ -20,39 +20,54 @@
     <form id="contact-form">
       <input name="name" placeholder="Jméno" required>
       <input name="email" type="email" placeholder="Email" required>
-      <select name="style" required>
-        <option value="">Vyberte typ sladkosti</option>
-        <optgroup label="Dort">
-          <option value="Čokoladový dort s višněmi">Čokoladový dort s višněmi</option>
-          <option value="Red velvet">Red velvet</option>
-          <option value="Tiramisu">Tiramisu</option>
-          <option value="Mrkový dort s ořechy">Mrkový dort s ořechy</option>
-        <optgroup label="Muffiny a cupcaky">
-          <option value="Banánový muffin">Banánový muffin</option>
-          <option value="Mrkové muffiny s ořechy">Mrkové muffiny s ořechy</option>
-          <option value="Cupcaky s jahodovým krémem">Cupcaky s jahodovým krémem</option>
-          <option value="Vanilkové cupcaky">Vanilkové cupcaky</option>
-        <optgroup label="Perníčky">
-          <option value="Vánoční perníček">Vánoční perníček</option>
-          <option value="Velikonoční perníček">Velikonoční perníček</option>
-          <option value="Srdíčka z perníku">Srdíčka z perníku</option>
-          <option value="Perníkové chaloupky 3D">Perníkové chaloupky 3D</option>
-         <optgroup label="Sušenky">
-           <option value="Cookies s čokoládou">Cookies s čokoládou</option>
-           <option value="Sušenky s předpovědí">Sušenky s předpovědí</option>
-           <option value="Linecké sušenky s marmeládou">Linecké sušenky s marmeládou</option>
-      </select>
+  <select id="category" name="category" required>
+    <option value="">Vyberte typ sladkosti</option>
+    <option value="dort">Dorty</option>
+    <option value="muffin">Muffiny a cupcaky</option>
+    <option value="pernicek">Perníčky</option>
+    <option value="susenka">Sušenky</option>
+  </select>
+
+<select id="product" name="product" required>
+  <option value="">Vyberte konkrétní produkt</option>
+</select>
       <textarea name="message" placeholder="Vaše přání nebo poznámka" required></textarea>
       <button type="submit">Odeslat objednávku</button>
     </form>
     <p id="response-message" style="margin-top: 1rem; font-weight: bold;"></p>
   </main>
   <script>
+  const categorySelect = document.getElementById('category');
+  const productSelect = document.getElementById('product');
+
+  const productsByCategory = {
+    dort: ["Čokoládový dort s višněmi", "Red velvet", "Tiramisu", "Mrkvový dort s ořechy"],
+    muffin: ["Banánový muffin", "Mrkvové muffiny s ořechy", "Cupcaky s jahodovým krémem", "Vanilkové cupcaky"],
+    pernicek: ["Vánoční perníček", "Velikonoční perníček", "Srdíčka z perníku", "Perníkové chaloupky 3D"],
+    susenka: ["Cookies s čokoládou", "Sušenky s předpovědí", "Linecké sušenky s marmeládou"]
+  };
+
+  categorySelect.addEventListener('change', () => {
+    const selectedCategory = categorySelect.value;
+    const products = productsByCategory[selectedCategory] || [];
+
+    productSelect.innerHTML = '<option value="">Vyberte konkrétní produkt</option>';
+
+    products.forEach(product => {
+      const option = document.createElement('option');
+      option.value = product;
+      option.textContent = product;
+      productSelect.appendChild(option);
+    });
+  });
+</script>
+  <script>
     const form = document.getElementById('contact-form');
     const responseMessage = document.getElementById('response-message');
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
       const data = Object.fromEntries(new FormData(form));
 
       fetch('http://localhost:3000/api/contact', {
@@ -63,7 +78,7 @@
       .then(res => res.json())
       .then(result => {
         if (result.success) {
-          responseMessage.textContent = result.message;'Děkujeme za objednávku!';
+          responseMessage.textContent =result.message;'Děkujeme za objednávku!';
           responseMessage.style.color = 'green';
           form.reset();
         } else {
