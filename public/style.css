@@ -182,11 +182,11 @@ main.contact {
 }
 .overlay2 {
   background-color: var(--overlay-bg-color);
-  padding: 2rem;
+  padding: 1rm;
   border-radius: 1rem;
   color: var(--overlay-text-color);
   font-family: "Playfair Display";
-  max-width: 600px;
+  max-width: 400px;
   margin: auto;
   
 }
