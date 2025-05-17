@@ -224,5 +224,5 @@ main.contact {
 .button {
   font-family: "Playfair Display";
   border: none;
-  color: #ff9aa2;
+  color: hwb(355 60% 0%);
 }
