@@ -1,5 +1,5 @@
 :root {
-  --main-bg-color: #fffaf6;
+  --main-bg-color: hsl(27, 100%, 98%);
   --nav-bg-color: #ff9aa2;
   --button-bg-color: #ffb347;
   --footer-bg-color: #f67280;
@@ -9,7 +9,7 @@
   --button-hover-bg-color: #e88e96;
   --box-shadow-light: 0 0 10px rgba(0, 0, 0, 0.1);
   --box-shadow-lightest: 0 0 10px rgba(0, 0, 0, 0.05);
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display";
   font-optical-sizing: auto;
   font-weight: 900;
   font-style: italic;
@@ -18,11 +18,11 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* CSS Reset */
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Playfair Display";
   background-color: var(--main-bg-color);
   color: var(--text-color);
 }
@@ -32,6 +32,8 @@ nav {
   padding: 1rem;
   text-align: center;
   font-family: "Playfair Display";
+  width: 100%;
+  
 }
 
 nav a {
@@ -39,6 +41,7 @@ nav a {
   margin: 0 1rem;
   text-decoration: none;
   font-weight: bold;
+  size: 15px;
 }
 
 .hero {
@@ -56,6 +59,7 @@ nav a {
   padding: 2rem;
   border-radius: 1rem;
   color: var(--overlay-text-color);
+  font-family: "Playfair Display";
 }
 
 .button {
@@ -75,9 +79,10 @@ button {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  padding: 0.75rem; /* Merged with input styles */
+  padding: 0.75rem; 
   border-radius: 0.5rem;
   font-size: 1rem;
+  font-family: "Playfair Display";
 }
 
 button:hover {
@@ -89,6 +94,8 @@ footer {
   color: white;
   text-align: center;
   padding: 2rem;
+  width: 100%;
+  font-family: "Playfair Display";
 }
 
 .service-grid, .portfolio-grid {
@@ -136,3 +143,31 @@ input, select, textarea {
   margin: 2rem auto;
 }
 
+.order-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+.html, body {
+  height: 100%;
+}
+
+main.contact {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  padding-top: 50px;
+
+}
+.section {
+  font-family: "Playfair Display";
+}
+.objednat {
+  padding-bottom: 20px;
+  align-items: center;
+}
