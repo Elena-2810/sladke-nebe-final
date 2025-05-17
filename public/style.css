@@ -221,4 +221,14 @@ main.contact {
   font-size: 1.5rem;
   cursor: pointer;
 }
+.button2 {
+   background-color: var(--button-bg-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1rem;
+}
 
