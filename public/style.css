@@ -221,3 +221,6 @@ main.contact {
   font-size: 1.5rem;
   cursor: pointer;
 }
+.signin {
+  margin-left: 100px;
+}
