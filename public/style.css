@@ -221,6 +221,8 @@ main.contact {
   font-size: 1.5rem;
   cursor: pointer;
 }
-#signInBtn {
-  margin-left: auto;
+.button {
+  font-family: "Playfair Display";
+  border: none;
+  color: #ff9aa2;
 }
