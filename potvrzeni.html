@@ -75,7 +75,10 @@ if (productDataString) {
 
         if (confirmPurchaseBtn) {
           confirmPurchaseBtn.addEventListener('click', () => {
+            // Uložíme potvrdený produkt pre objednávkovú stránku
             localStorage.setItem('confirmedOrderDetail', JSON.stringify(product));
+            // Môžeme odstrániť pôvodný kľúč, ak už nie je potrebný
+            // localStorage.removeItem('selectedProductToConfirm'); 
             window.location.href = 'objednavka.html';
           });
         }
