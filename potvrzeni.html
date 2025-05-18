@@ -63,7 +63,6 @@
       const productNameEl = document.getElementById('confirmProductName');
       const confirmPurchaseBtn = document.getElementById('confirmPurchaseBtn');
       const productDisplayDiv = document.getElementById('productDisplay');
-
       const productDataString = localStorage.getItem('selectedProductToConfirm');
 
 
@@ -75,15 +74,12 @@ if (productDataString) {
 
         if (confirmPurchaseBtn) {
           confirmPurchaseBtn.addEventListener('click', () => {
-            // Uložíme potvrdený produkt pre objednávkovú stránku
-            localStorage.setItem('confirmedOrderDetail', JSON.stringify(product));
-            // Môžeme odstrániť pôvodný kľúč, ak už nie je potrebný
-            // localStorage.removeItem('selectedProductToConfirm'); 
+            localStorage.setItem('confirmedOrderDetail', JSON.stringify(product)); 
             window.location.href = 'objednavka.html';
           });
         }
       } else {
-        if (productNameEl) productNameEl.textContent = ''; // Vyčistiť "Načítání..."
+        if (productNameEl) productNameEl.textContent = '';
         if (productDisplayDiv) productDisplayDiv.innerHTML = '<p class="error-message">Nebyl vybrán žádný produkt. Vraťte se prosím na <a href="nabidka.html">nabídku</a>.</p>';
         if (confirmPurchaseBtn) confirmPurchaseBtn.style.display = 'none';
       }
