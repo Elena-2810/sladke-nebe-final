@@ -41,8 +41,8 @@
     .modal-content input[type="text"], .modal-content input[type="password"], .modal-content button[type="submit"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
     .close { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
     .close:hover, .close:focus { color: black; text-decoration: none; }
-    .section { max-width: 1000px; margin: 40px auto; padding: 20px; }
-    h2.nase { text-align: center; color: #5c3d2e; }
+    .section { max-width: 1000px; margin: 40px auto; padding: 20px; margin-bottom: 200px;}
+    h2.nase { text-align: center; color: #5c3d2e; padding-bottom: 20px;}
     .accordion-item { border-bottom: 1px solid #ddd; margin-bottom: 10px; }
     .accordion-item h3 { cursor: pointer; background: #f7d6bf; padding: 15px; margin: 0; font-size: 20px; border-radius: 8px; }
     .accordion-item .content { display: none; padding: 15px; background: #fff; text-align: center; /* Centrovanie produktov */ }
@@ -51,7 +51,7 @@
     .product p { min-height: 40px; margin-bottom: 10px; font-size: 1em; color: #5c3d2e; }
     .buy-btn { font-family: "Playfair Display"; background-color: #f58ca3; color: white; border: none; padding: 10px 15px; text-align: center; display: inline-block; font-size: 14px; margin-top: 10px; cursor: pointer; border-radius: 5px, sans-serif; }
     .buy-btn:hover { background-color: #e0798c; }
-    footer { background: #f58ca3; color: white; text-align: center; padding: 10px; margin-top: 40px; }
+    footer { background: #f58ca3; color: white; text-align: center; padding: 10px;  }
   </style>
 </head>
 <body class="order-page2" style="background-image: url('public/images/333.png'); background-size: cover; background-repeat: no-repeat; background-position: right;">
@@ -225,5 +225,20 @@
         
     }
   </script>
+  <script>
+document.querySelectorAll('.buy-btn').forEach(button => {
+  button.addEventListener('click', function () {
+    const name = this.getAttribute('data-product-name');
+    const image = this.getAttribute('data-product-image');
+    
+    // Сохраняем в localStorage
+    localStorage.setItem('selectedProductName', name);
+    localStorage.setItem('selectedProductImage', image);
+
+    // Перенаправляем на страницу подтверждения
+    window.location.href = 'potvrzeni.html';
+  });
+});
+</script>
 </body>
 </html>
