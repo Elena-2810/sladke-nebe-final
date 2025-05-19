@@ -1,7 +1,7 @@
 :root {
   --main-bg-color: hsl(27, 100%, 98%);
-  --nav-bg-color: #ff9aa2;
-  --button-bg-color: #ffb347;
+  --nav-bg-color: hwb(355 60% 0%);
+  --button-bg-color: hsl(35, 100%, 64%);
   --footer-bg-color: #f67280;
   --overlay-bg-color: rgba(255, 255, 255, 0.8);
   --text-color: #3a2e2e;
@@ -19,6 +19,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 body {
@@ -89,14 +90,7 @@ button:hover {
   background-color: var(--button-hover-bg-color);
 }
 
-footer {
-  background-color: var(--footer-bg-color);
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  width: 100%;
-  font-family: "Playfair Display";
-}
+.footer { background: #f58ca3; color: white; text-align: center; padding: 10px; margin-top: 40px; }
 
 .service-grid, .portfolio-grid {
   display: flex;
@@ -170,15 +164,6 @@ main.contact {
 .objednat {
   padding-bottom: 20px;
   align-items: center;
-  padding-left: 25px;
-}
-.order-page2 {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
 }
 .overlay2 {
   background-color: var(--overlay-bg-color);
@@ -186,51 +171,89 @@ main.contact {
   border-radius: 1rem;
   color: var(--overlay-text-color);
   font-family: "Playfair Display";
-  max-width: 2000px;
+  max-width: 1000px;
   margin: auto;
-
-  
 }
-.nase {
+.content {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 15px;
+  text-align: center;
+}
+.product {
+  display: inline-block;
+  flex: 0 0 220px;
+  flex-basis: 220px;
+  margin: 10px;
+  padding: 15px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+
+}
+.product-img {
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  align-self: center;
   margin-bottom: 15px;
 }
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
+.o-nas {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 900px;
+  font-size: 18px;
+  line-height: 3;
+  text-align: left;
+  width: 100%;
+  display: block;
+  font-weight: normal;
+
+}
+.o-nas-nadpis {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: block;
+ 
+
+}
+.o-nas-blok {
+  width: 100%;
+  margin: 30x auto;
+  padding: 20px;
+}
+.o-nas-ul {
+  padding-left: 20px;
+  line-height: 3;
+  font-weight: normal;
+}
+.photo {
+  
+  width: 300px;
+  height: 200px;
+  
+}
+.galary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+.photo img {
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
+  object-fit: cover;
+  display: block;
 }
-
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 2rem;
-  border-radius: 1rem;
-  width: 300px;
+.portfolio {
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-   font-family: "Playfair Display", serif;
-
+  font-size: 32px;
+  width: 100%;
+  display: block;
+  margin-top: 40px;
 }
-
-.close {
-  float: right;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.button2 {
-   background-color: var(--button-bg-color);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 1rem;
-  font-family: "Playfair Display", serif;
-}
-
