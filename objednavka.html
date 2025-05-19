@@ -23,9 +23,9 @@
     #orderedProductInfo h4 { margin-top:0; color: #5c3d2e; }
     #orderedProductImage { max-width: 100%; height: auto; max-height:200px; border-radius: 8px; margin-bottom:10px; }
     #orderedProductName { font-size: 1.2em; font-weight: bold; color: #5c3d2e; }
-    #contact-form input, #contact-form textarea, #contact-form button { width: calc(100% - 22px); padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-size: 1em;}
-    #contact-form textarea { resize: vertical; min-height: 100px; }
-    #contact-form button { background-color: #5cb85c; color: white; font-weight:bold; cursor:pointer; }
+    #contact-form input, #contact-form textarea, #contact-form button { font-family: "Playfair Display"; width: calc(100% - 22px); padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box, sans-serif; font-size: 1em;}
+    #contact-form textarea { resize: vertical; min-height: 100px; font-family: "Playfair Display";}
+    #contact-form button { font-family:"Playfair Display";background-color:  #5cb85c; color: white; font-weight:bold; cursor:pointer; }
     #contact-form button:hover { background-color: #4cae4c; }
     #response-message { margin-top: 1rem; font-weight: bold; text-align:center; }
     .error-message-order { color: red; font-weight: bold; text-align: center; margin-bottom: 20px; }
@@ -65,9 +65,11 @@
       <p id="orderedProductName">Načítání produktu...</p>
     </div>
 
-    <form id="contact-form" style="display:none;"> <input name="name" placeholder="Jméno" required>
-      <input name="email" type="email" placeholder="Email" required>
-      <textarea name="message" placeholder="Vaše přání nebo poznámka (nepovinné)"></textarea> <button type="submit">Odeslat objednávku</button>
+    <form id="contact-form"> 
+      <input id="name" name="name" placeholder="Jméno" required>
+      <input id="email" name="email" type="email" placeholder="Email" required>
+      <textarea id="message" name="message" placeholder="Vaše přání nebo poznámka (nepovinné)"></textarea> 
+      <button type="submit">Odeslat objednávku</button>
     </form>
     <p id="response-message" style="margin-top: 1rem; font-weight: bold;"></p>
   </main>
@@ -76,10 +78,12 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      
       const productImageEl = document.getElementById('orderedProductImage');
       const productNameEl = document.getElementById('orderedProductName');
-      const contactForm = document.getElementById('contact-form'); // Formulár pre kontaktné údaje
+      const contactForm = document.getElementById('contact-form');
       const orderedProductInfoDiv = document.getElementById('orderedProductInfo');
+      const responseMessage = document.getElementById('response-message');
 
       const productDataString = localStorage.getItem('confirmedOrderDetail');
 
@@ -87,79 +91,72 @@
         const product = JSON.parse(productDataString);
         if (productImageEl) productImageEl.src = product.image;
         if (productNameEl) productNameEl.textContent = product.name;
-        if (contactForm) contactForm.style.display = 'block'; // Zobraziť formulár až keď je produkt načítaný
+        if (contactForm) contactForm.style.display = 'block';
       } else {
         if (orderedProductInfoDiv) orderedProductInfoDiv.innerHTML = '<p class="error-message-order">Žádný produkt nebyl potvrzen k objednávce. Prosím, <a href="nabidka.html">vyberte produkt z nabídky</a>.</p>';
         if (contactForm) contactForm.style.display = 'none';
       }
-    });
 
-    // Odoslanie formulára objednávky
-    const orderForm = document.getElementById('contact-form');
-    const responseMessage = document.getElementById('response-message');
+    
+      if (contactForm && responseMessage) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
 
-    if (orderForm && responseMessage) {
-      orderForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+          const formData = new FormData(contactForm);
+          const data = Object.fromEntries(formData.entries());
 
-        const formData = new FormData(orderForm);
-        const data = Object.fromEntries(formData.entries());
+          const confirmedProductString = localStorage.getItem('confirmedOrderDetail');
+          if (confirmedProductString) {
+            data.orderedProduct = JSON.parse(confirmedProductString);
+          } else {
+            responseMessage.textContent = 'Chyba: Detaily produktu nebyly nalezeny. Objednávka nemohla být odeslána.';
+            responseMessage.style.color = 'red';
+            return;
+          }
 
-        const confirmedProductString = localStorage.getItem('confirmedOrderDetail');
-        if (confirmedProductString) {
-          data.orderedProduct = JSON.parse(confirmedProductString); // Pridanie detailov produktu
-        } else {
-          responseMessage.textContent = 'Chyba: Detaily produktu nebyly nalezeny. Objednávka nemohla být odeslána.';
-          responseMessage.style.color = 'red';
-          return; // Zastaviť odoslanie
-        }
-        
-        fetch('http://localhost:3000/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        })
-        .then(res => {
+          fetch('http://localhost:3001/api/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(order)
+          })
+          .then(res => {
             if (!res.ok) { return res.json().then(err => { throw err; }); }
             return res.json();
-        })
-        .then(result => {
-          if (result.success) {
-            responseMessage.textContent = result.message || 'Děkujeme za objednávku!';
-            responseMessage.style.color = 'green';
-            orderForm.reset();
-            localStorage.removeItem('confirmedOrderDetail'); // Vyčistiť po úspešnej objednávke
-            localStorage.removeItem('selectedProductToConfirm'); // Aj tento pre istotu
-            // Aktualizovať zobrazenie produktu, alebo presmerovať
-            document.getElementById('orderedProductInfo').innerHTML = '<h4>Objednávka byla úspěšně odeslána!</h4>';
-            orderForm.style.display = 'none';
-          } else {
-            responseMessage.textContent = result.error ||'Došlo k chybě při odeslání.';
+          })
+          .then(result => {
+            if (result.success) {
+              responseMessage.textContent = result.message || 'Děkujeme za objednávku!';
+              responseMessage.style.color = 'green';
+              contactForm.reset();
+              localStorage.removeItem('confirmedOrderDetail');
+              localStorage.removeItem('selectedProductToConfirm');
+              document.getElementById('orderedProductInfo').innerHTML = '<h4>Objednávka byla úspěšně odeslána!</h4>';
+              contactForm.style.display = 'none';
+            } else {
+              responseMessage.textContent = result.error ||'Došlo k chybě při odeslání.';
+              responseMessage.style.color = 'red';
+            }
+          })
+          .catch((error) => {
+            console.error('Fetch error:', error);
+            responseMessage.textContent = (error && error.error) ? error.error : 'Došlo k kritické chybě při odeslání.';
             responseMessage.style.color = 'red';
-          }
-        })
-        .catch((error) => {
-          console.error('Fetch error:', error);
-          responseMessage.textContent = error.error || 'Došlo k kritické chybě při odeslání.';
-
-
-responseMessage.style.color = 'red';
+          });
         });
-      });
-    }
-  </script>
-  <script> // Login Modal Script
-    const modal = document.getElementById("loginModal");
-    const btn = document.getElementById("signInBtn");
-    const span = document.querySelector("#loginModal .close");
+      }
 
-    if (btn && modal && span) {
+      // Login modal
+      const modal = document.getElementById("loginModal");
+      const btn = document.getElementById("signInBtn");
+      const span = document.querySelector("#loginModal .close");
+
+      if (btn && modal && span) {
         btn.onclick = () => { modal.style.display = "block"; }
         span.onclick = () => { modal.style.display = "none"; }
         window.onclick = (event) => { if (event.target == modal) { modal.style.display = "none"; } }
-    } else {
-        // console.error("Modal elements not found on objednavka.html");
-    }
+      }
+    });
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
