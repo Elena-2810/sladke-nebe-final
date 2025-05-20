@@ -183,17 +183,16 @@
  </div>
   <footer>&copy; 2025 Sladké Nebe - Ručně a s láskou pečené.</footer>
 
-  <script>
-    function toggleSection(element) {
-      const content = element.nextElementSibling;
-      const isOpen = content.style.display === "block";
-      if (isOpen) {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    }
+ 
+ <script>
+  function toggleSection(element) {
+    const content = element.nextElementSibling;
+    const parent = element.parentElement;
 
+    parent.classList.toggle("active");
+  }
+</script>
+ 
     
     const buyButtons = document.querySelectorAll('.buy-btn');
     buyButtons.forEach(button => {
