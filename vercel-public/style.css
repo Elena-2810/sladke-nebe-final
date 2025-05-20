@@ -280,10 +280,12 @@ main.contact {
 }
 .content {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 30px;
   padding: 20px;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .product {
@@ -319,8 +321,8 @@ main.contact {
   background-color: #e78da8;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
