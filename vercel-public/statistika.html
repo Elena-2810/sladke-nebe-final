@@ -70,6 +70,7 @@
       </nav>
   <main>
     <h2>Co si naši zákazníci nejčastěji objednávají?</h2>
+   <canvas id="startsChart" width="600" height="300"></canvas>
     <ul id="stats"></ul>
   </main>
   <script>
@@ -83,7 +84,7 @@
           ul.appendChild(li);
         }
       });
-    <canvas id="buyersChart" width="400" height="200"></canvas>
+    
   </script>
   <footer>&copy; 2025 Sladké Nebe.</footer>
   <script>
@@ -124,7 +125,7 @@
     }
   });
 </script>
-  <script src="https://sdn.jsdeliver.net/npm/chart.js"></script>
+   <script src="https://cdn.jsdeliver.net/npm/chart.js"></script>
   <script>
   const ctx = document.getElementById('buyersChart').getContext('2d');
   const buyersChart = new Chart(ctx, {
