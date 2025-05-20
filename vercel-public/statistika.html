@@ -83,6 +83,7 @@
           ul.appendChild(li);
         }
       });
+    <canvas id="buyersChart" width="400" height="200"></canvas>
   </script>
   <footer>&copy; 2025 Sladké Nebe.</footer>
   <script>
@@ -91,25 +92,24 @@
   const signInBtn = document.getElementById("signInBtn");
   const closeModal = document.querySelector(".close");
 
-  // Показать окно входа
+
   signInBtn.addEventListener("click", () => {
     loginModal.style.display = "block";
   });
 
-  // Закрыть окно входа
   closeModal.addEventListener("click", () => {
     loginModal.style.display = "none";
   });
 
-  // Проверка логина и пароля
+
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    // Простой логин (можешь изменить по желанию)
+
     if (username === "admin" && password === "1234") {
-      // Сохраняем в localStorage
+   
       localStorage.setItem("loggedIn", "true");
       window.location.href = "admin.html";
     } else {
@@ -117,10 +117,33 @@
     }
   });
 
-  // Закрытие при клике вне окна
+
   window.addEventListener("click", (e) => {
     if (e.target == loginModal) {
       loginModal.style.display = "none";
+    }
+  });
+</script>
+  <script src="https://sdn.jsdeliver.net/npm/chart.js"></script>
+  <script>
+  const ctx = document.getElementById('buyersChart').getContext('2d');
+  const buyersChart = new Chart(ctx, {
+    type: 'bar', 'line', 'pie', 'doughnut' 
+    data: {
+      labels: ['Anna', 'Tomáš', 'Lucie', 'Marek', 'Eva'], 
+      datasets: [{
+        label: 'Počet objednávek',
+        data: [12, 9, 5, 7, 3], 
+        backgroundColor: '#e78da8'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
     }
   });
 </script>
