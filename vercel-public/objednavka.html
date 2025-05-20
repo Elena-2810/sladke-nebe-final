@@ -170,5 +170,44 @@
   </script>
   <script type="module" src="script.js"></script>
   <script type="module" src="firebase.js"></script>
+  <script>
+  const loginForm = document.getElementById("loginForm");
+  const loginModal = document.getElementById("loginModal");
+  const signInBtn = document.getElementById("signInBtn");
+  const closeModal = document.querySelector(".close");
+
+  // Показать окно входа
+  signInBtn.addEventListener("click", () => {
+    loginModal.style.display = "block";
+  });
+
+  // Закрыть окно входа
+  closeModal.addEventListener("click", () => {
+    loginModal.style.display = "none";
+  });
+
+  // Проверка логина и пароля
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = loginForm.username.value;
+    const password = loginForm.password.value;
+
+    // Простой логин (можешь изменить по желанию)
+    if (username === "admin" && password === "1234") {
+      // Сохраняем в localStorage
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "admin.html";
+    } else {
+      alert("Neplatné přihlašovací údaje");
+    }
+  });
+
+  // Закрытие при клике вне окна
+  window.addEventListener("click", (e) => {
+    if (e.target == loginModal) {
+      loginModal.style.display = "none";
+    }
+  });
+</script>
 </body>
 </html>
