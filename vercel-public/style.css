@@ -298,4 +298,7 @@ main.contact {
 .order button:hover {
   background-color: #ff6b89;
 }
+.obj {
+  margin-bottom: 15px;
+}
 
