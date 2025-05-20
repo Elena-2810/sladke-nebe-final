@@ -187,11 +187,16 @@
  <script>
   function toggleSection(element) {
     const content = element.nextElementSibling;
-    const parent = element.parentElement;
-
-    parent.classList.toggle("active");
+    const isOpen = content.style.display === "block";
+    if (isOpen) {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
   }
-</script>
+
+
+  
  
     
     const buyButtons = document.querySelectorAll('.buy-btn');
