@@ -191,7 +191,6 @@ main.contact {
   background-color: #fff;
   text-align: center;
   display:flex;
-  flex-direction: column;
   justify-content: space-between;
   height: 400px;
 
