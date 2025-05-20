@@ -201,6 +201,8 @@
       button.addEventListener('click', (event) => {
         const productName = event.target.dataset.productName;
         const productImage = event.target.dataset.productImage;
+        console.log('productName:', productName);
+        console.log('productImage:', productImage);
         if (productName && productImage) {
           const selectedProduct = { name: productName, image: productImage };
           localStorage.setItem('selectedProductToConfirm', JSON.stringify(selectedProduct));
@@ -231,9 +233,10 @@ document.querySelectorAll('.buy-btn').forEach(button => {
     const name = this.getAttribute('data-product-name');
     const image = this.getAttribute('data-product-image');
     
-    // Сохраняем в localStorage
-    localStorage.setItem('selectedProductName', name);
-    localStorage.setItem('selectedProductImage', image);
+    localStorage.setItem('confirmedOrderDetail', JSON.stringify({
+      name, 
+      image
+    }));
 
     // Перенаправляем на страницу подтверждения
     window.location.href = 'potvrzeni.html';

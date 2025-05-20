@@ -20,7 +20,7 @@ app.get('/api/data', (req, res) => {
 });
 
 
-const { db } = require('./public2/firebase'); // убедись, что у тебя есть этот файл
+const { db } = require('./vercel-public/public2/firebase'); // убедись, что у тебя есть этот файл
 const { collection, addDoc } = require('firebase/firestore');
 
 app.post('/api/data', async (req, res) => {
