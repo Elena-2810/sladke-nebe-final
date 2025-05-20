@@ -176,6 +176,7 @@ main.contact {
 }
 .content {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
   gap: 30px;
