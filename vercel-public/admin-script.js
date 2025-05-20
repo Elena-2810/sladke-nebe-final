@@ -6,7 +6,6 @@ import {
   deleteDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-import { updateDoc, doc} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 // Твоя конфигурация Firebase
 const firebaseConfig = {
@@ -32,7 +31,22 @@ async function loadOrders() {
   querySnapshot.forEach((docSnap) => {
     const order = docSnap.data();
     const editBtn = document.createElement("button");
-editBtn.textContent = "Upravit";
+
+
+
+    const orderDiv = document.createElement("div");
+    orderDiv.classList.add("order");
+   
+
+    orderDiv.innerHTML = `
+      <p><strong>Jméno:</strong> ${order.name}</p>
+      <p><strong>Email:</strong> ${order.email}</p>
+      <p><strong>Dort:</strong> ${order.product}</p>
+      <p><strong>Poznámka:</strong> ${order.message || ''}</p>
+      ${order.image ? `<img src="${order.image}" alt="Dort" style="max-width: 150px;" />` : ''}
+      <button data-id="${docSnap.id}">Smazat</button>
+    `;
+    editBtn.textContent = "Upravit";
 editBtn.addEventListener("click", () => {
   const newName = prompt("Změnit jméno:", order.name);
   const newMessage = prompt("Změnit poznámku:", order.message);
@@ -48,20 +62,8 @@ editBtn.addEventListener("click", () => {
   }
 });
 
-orderDiv.appendChild(editBtn);
-
-    const orderDiv = document.createElement("div");
-    orderDiv.classList.add("order");
-
-    orderDiv.innerHTML = `
-      <p><strong>Jméno:</strong> ${order.name}</p>
-      <p><strong>Email:</strong> ${order.email}</p>
-      <p><strong>Dort:</strong> ${order.product}</p>
-      <p><strong>Poznámka:</strong> ${order.message || ''}</p>
-      ${order.image ? <img src="${order.image}" alt="Dort" style="max-width: 150px;" /> : ''}
-      <button data-id="${docSnap.id}">Smazat</button>
-    `;
-
+ orderDiv.appendChild(editBtn);
+    
     // Удаление заказа
     const deleteBtn = orderDiv.querySelector("button");
     deleteBtn.addEventListener("click", async () => {
