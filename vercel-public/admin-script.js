@@ -1,23 +1,27 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import {
   getFirestore,
   collection,
   getDocs,
   deleteDoc,
-  doc
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// Твоя конфигурация Firebase
+// ВСТАВЬ СЮДА СВОЙ КОНФИГ ИЗ FIREBASE!
 const firebaseConfig = {
-  apiKey: "ТВОЙ_API_KEY",
-  authDomain: "ТВОЙ_AUTH_DOMAIN",
-  projectId: "ТВОЙ_PROJECT_ID",
-  storageBucket: "ТВОЙ_STORAGE_BUCKET",
-  messagingSenderId: "ТВОЙ_SENDER_ID",
-  appId: "ТВОЙ_APP_ID"
+  apiKey: "AIzaSyDj9UMnxQlNKAWly_TmMQW7ZaldPNhtsk8",
+  authDomain: "sladke-nebe-final.firebaseapp.com",
+  projectId: "sladke-nebe-final",
+  storageBucket: "sladke-nebe-final.firebasestorage.app",
+  messagingSenderId: "310324730606",
+  appId: "1:310324730606:web:0e8aa8353b3a691735f1ff",
+  measurementId: "G-P02SDJWCT7"
 };
 
-const app = initializeApp(firebaseConfig);
+// Защита от повторной инициализации
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
 const db = getFirestore(app);
 
 // Получаем контейнер для вывода заказов
