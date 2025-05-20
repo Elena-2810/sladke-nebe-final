@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie | Sladké Nebe</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: "Playfair Display", sans-serif;
+    background: #fff8f2;
+    margin: 0;
+    padding: 0;
+  }
+  nav {
+    background: #f58ca3;
+    padding: 15px;
+    text-align: center;
+  }
+  nav a, nav .button2 { 
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  nav .button2 {
+      padding: 8px 15px; 
+      border-radius: 5px; 
+      background-color: #e0798c; 
+      border: none;
+      cursor: pointer;
+  }
+  nav .button2:hover {
+      background-color: #d16a7b;
+  }
+  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+  .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; border-radius: 5px; position: relative; text-align: left; }
+  .modal-content h3 { text-align: center; margin-top: 0; }
+  .modal-content input[type="text"], .modal-content input[type="password"], .modal-content button[type="submit"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+  .close { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+  .close:hover, .close:focus { color: black; text-decoration: none; }
+  footer { background: #f58ca3; color: white; text-align: center; padding: 10px; margin-top: 40px; }
+</style>
+ 
+</head>
+<body>
+  <nav>
+    <a href="index.html">Domů</a>
+    <a href="sluzby.html">Nabídka</a>
+    <a href="galerie.html">Galerie</a>
+    <a href="o-nas.html">O nás</a>
+    <a href="objednavka.html">Objednat</a>
+    <a href="statistika.html">Statistiky</a>
+    <button class="button2" id="signInBtn">Sign In</button>
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Přihlášení</h3>
+        <form id="loginForm">
+          <input type="text" name="username" placeholder="Uživatelské jméno" required>
+          <input type="password" name="password" placeholder="Heslo" required>
+          <button type="submit">Přihlásit se</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <main class="portfolio">
+    <h2>Naše útulná pekárna na fotkách</h2>
+    <div class="portfolio-grid" id="portfolio-gallery"></div>
+  <div class="galary">
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-00.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-02.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-03.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-05.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-06.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-08.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-10.jpg" class="responsive">
+    </div>
+    <div class="photo">
+      <img src="/images/photo_2025-05-18_14-26-20.jpg" class="responsive">
+    </div>
+  </div>
+    
+  </main>
+  <script>
+    fetch('/api/portfolio')
+      .then(res => res.json())
+      .then(data => {
+        const gallery = document.getElementById('portfolio-gallery');
+        data.forEach(photo => {
+          const img = document.createElement('img');
+          img.src = photo.url;
+          gallery.appendChild(img);
+        });
+      });
+  </script>
+  <footer>&copy; 2025 Sladké Nebe.</footer>
+</body>
+</html>
