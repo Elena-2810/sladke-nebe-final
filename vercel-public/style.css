@@ -306,4 +306,8 @@ main.contact {
 }
 .accordion-item .content {
   display: none;
+  transition: all 0.3s ease;
+}
+.accordion-item.active .content {
+  display: block;
 }
