@@ -8,7 +8,7 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// ВСТАВЬ СЮДА СВОЙ КОНФИГ ИЗ FIREBASE!
+
 const firebaseConfig = {
   apiKey: "AIzaSyDj9UMnxQlNKAWly_TmMQW7ZaldPNhtsk8",
   authDomain: "sladke-nebe-final.firebaseapp.com",
@@ -19,17 +19,17 @@ const firebaseConfig = {
   measurementId: "G-P02SDJWCT7"
 };
 
-// Защита от повторной инициализации
+
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
 
 
-// Получаем контейнер для вывода заказов
+
 const ordersContainer = document.getElementById("orders-container");
 
-// Загрузка заказов
+
 async function loadOrders() {
-  ordersContainer.innerHTML = ""; // Очистим перед загрузкой
+  ordersContainer.innerHTML = ""; 
   const querySnapshot = await getDocs(collection(db, "orders"));
 
   querySnapshot.forEach((docSnap) => {
@@ -61,14 +61,14 @@ editBtn.addEventListener("click", () => {
       name: newName,
       message: newMessage
     }).then(() => {
-      loadOrders(); // перезагрузим список
+      loadOrders(); 
     });
   }
 });
 
  orderDiv.appendChild(editBtn);
     
-    // Удаление заказа
+
     const deleteBtn = orderDiv.querySelector("button");
     deleteBtn.addEventListener("click", async () => {
       await deleteDoc(doc(db, "orders", docSnap.id));
