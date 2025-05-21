@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// КОНФИГУРАЦИЯ — оставь свою
+
 const firebaseConfig = {
   apiKey: "AI...твой-ключ",
   authDomain: "sladke-nebe-final.firebaseapp.com",
@@ -12,9 +12,9 @@ const firebaseConfig = {
   measurementId: "G-P02SDJWCT7"
 };
 
-// ИНИЦИАЛИЗАЦИЯ Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp); // <<< ВАЖНО: инициализируем Firestore
 
-// ЭКСПОРТИРУЕМ
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp); 
+
+
 export  { db, collection, addDoc };
