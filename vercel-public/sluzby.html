@@ -239,7 +239,7 @@ document.querySelectorAll('.buy-btn').forEach(button => {
       image
     }));
 
-    // Перенаправляем на страницу подтверждения
+   
     window.location.href = 'potvrzeni.html';
   });
 });
@@ -250,23 +250,23 @@ document.querySelectorAll('.buy-btn').forEach(button => {
   const signInBtn = document.getElementById("signInBtn");
   const closeModal = document.querySelector(".close");
 
-  // Показать окно входа
+
   signInBtn.addEventListener("click", () => {
     loginModal.style.display = "block";
   });
 
-  // Закрыть окно входа
+
   closeModal.addEventListener("click", () => {
     loginModal.style.display = "none";
   });
 
-  // Проверка логина и пароля
+
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    // Простой логин (можешь изменить по желанию)
+  
     if (username === "admin" && password === "1234") {
       // Сохраняем в localStorage
       localStorage.setItem("loggedIn", "true");
@@ -276,7 +276,7 @@ document.querySelectorAll('.buy-btn').forEach(button => {
     }
   });
 
-  // Закрытие при клике вне окна
+ 
   window.addEventListener("click", (e) => {
     if (e.target == loginModal) {
       loginModal.style.display = "none";
