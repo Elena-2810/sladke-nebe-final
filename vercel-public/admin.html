@@ -48,7 +48,7 @@
 <body class="order-page" style="background-image: url('/images/Bows2.png'); background-repeat: no-repeat; background-attachment: fixed; background-size: auto; ">
 
   <script>
-  // Проверка: вошёл ли пользователь
+  
   if (localStorage.getItem("loggedIn") !== "true") {
     window.location.href = "index.html"; // или другая страница
   }
@@ -92,25 +92,25 @@
   const signInBtn = document.getElementById("signInBtn");
   const closeModal = document.querySelector(".close");
 
-  // Показать окно входа
+
   signInBtn.addEventListener("click", () => {
     loginModal.style.display = "block";
   });
 
-  // Закрыть окно входа
+
   closeModal.addEventListener("click", () => {
     loginModal.style.display = "none";
   });
 
-  // Проверка логина и пароля
+ 
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    // Простой логин (можешь изменить по желанию)
+   
     if (username === "admin" && password === "1234") {
-      // Сохраняем в localStorage
+    
       localStorage.setItem("loggedIn", "true");
       window.location.href = "admin.html";
     } else {
@@ -118,7 +118,7 @@
     }
   });
 
-  // Закрытие при клике вне окна
+
   window.addEventListener("click", (e) => {
     if (e.target == loginModal) {
       loginModal.style.display = "none";
